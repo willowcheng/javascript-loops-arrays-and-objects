@@ -3,6 +3,8 @@
  */
 var message = '';
 var student;
+var answer;
+var flag = false;
 
 var students = [
     {
@@ -36,13 +38,23 @@ function print(message) {
     outputDiv.innerHTML = message;
 }
 
-for (var i = 0; i < students.length; i++) {
-    student = students[i];
-    message += '<h2>Student: ' + student.name + '</h2>';
-    message += '<p>Track: ' + student.track + '</p>';
-    message += '<p>Points: ' + student.points + '</p>';
-    message += '<p>Achievements: ' + student.achievements + '</p>';
-}
-
-console.log(message);
-print(message);
+do {
+    answer = prompt("Input student name, please.");
+    answer = answer.toLowerCase();
+    console.log(answer);
+    if(answer === null || answer === "quit") flag = true;
+    else {
+        for (var i = 0; i < students.length; i++) {
+            student = students[i];
+            if(student.name.toLowerCase() === answer) {
+                console.log(answer);
+                message = '<h2>Student: ' + student.name + '</h2>';
+                message += '<p>Track: ' + student.track + '</p>';
+                message += '<p>Points: ' + student.points + '</p>';
+                message += '<p>Achievements: ' + student.achievements + '</p>';
+                print(message);
+                flag = true;
+            }
+        }
+    }
+} while(!flag);
